@@ -1,0 +1,15 @@
+// Valores arredondados. NASA Planetary Fact Sheet, edição de 18/03/2025.
+// Diâmetros médios: 2 × raio médio volumétrico do JPL (consulta 13/11/2026).
+export const planets = [
+ ['mercury','Mercúrio','#a99b8e',4879,.330,3.7,57.9,1407.6,4222.6,88,167,0,'Exosfera muito tênue: oxigênio, sódio e hidrogênio.','O menor planeta e o mais próximo do Sol. Sua superfície rochosa conserva numerosas crateras.','Uma rotação e meia corresponde aproximadamente a uma órbita.'],
+ ['venus','Vênus','#dfb978',12104,4.87,8.9,108.2,-5832.5,2802,224.7,464,0,'Dióxido de carbono e nitrogênio.','Uma atmosfera densa produz um intenso efeito estufa. É o planeta mais quente.','Sua rotação é retrógrada: gira no sentido oposto ao da Terra.'],
+ ['earth','Terra','#559de0',12756,5.97,9.8,149.6,23.9,24,365.2,15,1,'Nitrogênio e oxigênio.','Oceanos de água líquida e uma atmosfera protetora caracterizam nosso planeta.','É o único mundo onde a existência de vida foi confirmada.'],
+ ['mars','Marte','#d57551',6792,.642,3.7,228,24.6,24.7,687,-65,2,'Dióxido de carbono, nitrogênio e argônio.','Um mundo rochoso com calotas polares, vulcões e evidências de água no passado.','O óxido de ferro dá ao solo sua coloração avermelhada.'],
+ ['jupiter','Júpiter','#d8b08c',142984,1898,23.1,778.5,9.9,9.9,4331,-110,95,'Hidrogênio e hélio.','O maior planeta possui faixas de nuvens e grandes tempestades persistentes.','A Grande Mancha Vermelha é uma tempestade observada há séculos.'],
+ ['saturn','Saturno','#ddca96',120536,568,9,1432,10.7,10.7,10747,-140,274,'Hidrogênio e hélio.','Seus anéis são compostos sobretudo de partículas de gelo, com material rochoso.','Sua densidade média é menor que a da água.'],
+ ['uranus','Urano','#86d5df',51118,86.8,8.7,2867,-17.2,17.2,30589,-195,28,'Hidrogênio, hélio e metano.','Um gigante de gelo com eixo inclinado quase no plano de sua órbita.','A inclinação de cerca de 98° produz estações extremas; a rotação é retrógrada.'],
+ ['neptune','Netuno','#527ce7',49528,102,11,4515,16.1,16.1,59800,-200,16,'Hidrogênio, hélio e metano.','O planeta mais distante do Sol tem uma atmosfera dinâmica e ventos intensos.','Sua existência foi prevista por cálculos antes da observação em 1846.']
+].map((r,i)=>Object.fromEntries(['id','name','color','diameter','mass','gravity','distance','rotation','day','year','temperature','moons','atmosphere','description','fact'].map((k,j)=>[k,r[j]]).concat([['texture',['mercury','venus_atmosphere','earth_daymap','mars','jupiter','saturn','uranus','neptune'][i]],['equatorialDiameter',r[3]],['diameter',[4878.8,12103.6,12742.0168,6779,139822,116464,50724,49244][i]],['index',i],['obliquity',[0.034,177.4,23.4,25.2,3.1,26.7,97.8,28.3][i]],['type',i<4?'Planeta rochoso':i<6?'Gigante gasoso':'Gigante de gelo']])));
+export const number = value => new Intl.NumberFormat('pt-BR',{maximumFractionDigits:3}).format(value);
+export const angleAt = (days, period, initial=0) => initial + days / period * Math.PI * 2;
+export const dimensions = (p, proportional) => proportional ? {radius:p.diameter/2/149600000*200,distance:p.distance/149.6*200} : {radius:[.7,1,1.05,.82,2.8,2.35,1.65,1.6][p.index],distance:8+p.index*5.5};
